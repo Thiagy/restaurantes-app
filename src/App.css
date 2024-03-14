@@ -1,38 +1,103 @@
-.App {
-  text-align: center;
+.box-menu{
+
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2px;
+    height: 15px;
+    width: 20px;
+    cursor: pointer;
+    z-index: 9;
+}
+.card-box{
+    min-width: 330px;
+}
+.card{
+    min-width: 330px;
+}
+.litle-bar{
+    background-color: white;
+    height: 2px;
+    width: 90%;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+@media (max-width: 938px){
+
+    .textHero{
+        width: 100%;
+    }
+    .cardReservation{
+        width: 280px;
+    }
+
+    .coffe{
+        width: 100%;
+    }
+    
+    .cardCofe{
+        flex-direction: row;
+        height: 120px;
+        width: 80%;
+        border-radius: 16px;
+        border: 1px solid black;
+        gap: 20px;
+    }
+    .cardImageCoffe{
+        width: 50%;
+    }
+    .cardTextCoffe{
+        width: 40%;
+    }
+
+    .backgroundCardReservation{
+        height: 110vh;
+    }
+
+    .boxCardReservation{
+        gap: 5px;
+    }
+
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+@media (max-width: 750px){
+    
+    .shopping-details-box{
+        flex-direction: column-reverse;
+    }
+    .shopping-details{
+        width: 100%;
+        margin: 0 auto;
+        min-width: 330px;
+    }
+    
+    
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media (max-width: 556px){
+    
+    .boxHero{
+        width: 90%;
+    }
+
+    .boxInsertData{
+        width: 100%;
+    }
+    .insertData{
+        width: 70%;
+    }
+
+    .shopping-details form div{
+        padding: 5px 10px;
+    }
+
 }
 
-.App-link {
-  color: #61dafb;
-}
+@media (max-width: 320px){
+    
+    .menuHeader{
+        height: 100vh;
+        background-color: black;
+    }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
 }

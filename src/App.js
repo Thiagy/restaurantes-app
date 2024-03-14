@@ -1,25 +1,76 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect, useCallback } from 'react';
+import { Routes, Route} from 'react-router-dom'
+import getUniqueItems from './components/functions/getUniqueItems';
+import Header from './components/Header';
+import Footer from './components/Footer';
+import Message from './components/Message';
+import Home from './components/Home';
+import Cart from './components/Cart'
 
-function App() {
+import './App.css'
+
+export default function App(){
+
+  const[itemAdd, setItemAdd]=useState({})
+  const[itemTotal, setItemTotal]=useState(0)
+  const [totalSum, setTotalSum] = useState(0);
+  const [cartList, setCartList] = useState([]);
+
+  const[home, setHome]=useState(true)
+
+  const loadCart = useCallback(() => {
+
+    const storedCartList = JSON.parse(localStorage.getItem('listItemMenuCart')) || [];
+
+    let totalSum = storedCartList.reduce((sum, item) => sum + item.price, 0);
+
+    setCartList(getUniqueItems(storedCartList));
+  
+    setTotalSum(parseFloat(totalSum.toFixed(2)));
+
+    setItemTotal(storedCartList.length)
+    
+  }, [setItemTotal, setTotalSum, setCartList]);
+  
+  useEffect(() =>{
+    loadCart()
+  }, [loadCart, setHome, itemTotal]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Message 
+        message={itemAdd}
+      />
+      <Header 
+        itemTotal={itemTotal} 
+        home={home} 
+        setHome={setHome} 
+        totalSum={totalSum}/>
+
+      <Routes>
+          <Route 
+            path='/' 
+            element={<Home 
+                        setItemAdd={setItemAdd} 
+                        setItemTotal={setItemTotal} 
+                        totalSum={totalSum}
+                        setTotalSum={setTotalSum}
+            />}/>
+          <Route 
+            path='/cart' 
+            element={<Cart 
+                        setHome={setHome} 
+                        itemTotal={itemTotal} 
+                        setItemTotal={setItemTotal}
+                        totalSum={totalSum}
+                        setTotalSum={setTotalSum}
+                        cartList={cartList}
+                        setCartList={setCartList}
+                        />}/>
+      </Routes>
+      <Footer/>
+    </>
   );
 }
 
-export default App;
+
