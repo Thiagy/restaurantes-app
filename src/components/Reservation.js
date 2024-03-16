@@ -26,7 +26,7 @@ export default function Reservation() {
 
       setLoading(true);
 
-      const response = await fetch('http://localhost:8080/reservation', {
+      const response = await fetch('https://restaurantes-api.thiagosoftwareengineer.shop/reservation', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
